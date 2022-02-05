@@ -2,7 +2,6 @@
 
 from __future__ import division, print_function  # Python 2 and 3 compatibility
 import random
-from sample import random_word
 
 class Dictogram(dict):
     """Dictogram is a histogram implemented as a subclass of the dict type."""
@@ -20,12 +19,12 @@ class Dictogram(dict):
 
     def add_count(self, word, count=1):
         """Increase frequency count of given word by given count amount."""
-        self.tokens += count
         if word in self:
             self[word] += count
         else:
             self.types += 1
             self[word] = count
+        self.tokens += count
 
     def frequency(self, word):
         """Return frequency count of given word, or 0 if word is not found."""
@@ -35,10 +34,17 @@ class Dictogram(dict):
         else:
             return 0
 
+        #can also do return self.get(word, 0)
+
     def sample(self):
         """Return a word from this histogram, randomly sampled by weighting
         each word's probability of being chosen by its observed frequency."""
-        random_word(self)
+        distance = 0
+        dart = random.uniform(0, self.tokens)
+        for word, count in self.items():
+            distance += count
+            if distance >= dart:
+                return word
 
 
 
