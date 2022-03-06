@@ -17,8 +17,8 @@ def before_first_request():
 def home():
     """Route that returns a web page containing the generated text."""
     histogram = before_first_request()
-    word = random_word(histogram)
-    return f'Your word is: {word}'
+    #word = random_word(histogram)
+    return 'hello world'
 
 
 if __name__ == "__main__":
