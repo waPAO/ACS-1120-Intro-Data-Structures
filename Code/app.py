@@ -1,7 +1,7 @@
 """Main script, uses other modules to generate sentences."""
 from flask import Flask
 from histogram import histogram_dictionary
-from sample import random_word
+from dictogram import Dictogram
 
 
 app = Flask(__name__)

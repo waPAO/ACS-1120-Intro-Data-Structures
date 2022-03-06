@@ -61,7 +61,6 @@ class LinkedList:
 
         return length
 
-
     def append(self, item):
         """Insert the given item at the tail of this linked list.
         TODO: Running time: O(???) Why and under what conditions?"""
@@ -110,31 +109,44 @@ class LinkedList:
         # TODO: Update previous node to skip around node with matching data
         # TODO: Otherwise raise error to tell user that delete has failed
         # Hint: raise ValueError('Item not found: {}'.format(item))
-        node = self.head 
 
-        if node is None:
-            raise ValueError('Item not found: {}'.format(item))
-        elif node == item:
-            if node.next is None:
+        #check if linked list is empty
+        if self.head is None:
+            raise ValueError('Item not found: {}'.format(item)) 
+
+        starter_node = self.head
+        if starter_node.data == item: 
+            if starter_node.next is not None: 
+                self.head = starter_node.next
+            else: 
                 self.head = None
                 self.tail = None
-            else:
-                self.head = node.next
             return
-        else:
-            while node is not None:
-                next_node = node.next
-                if next_node == item:
-                    node.next = node.next.next
+
+        while starter_node is not None: 
+            next_node = starter_node.next
+            if next_node is not None:
+                if next_node.data == item: 
+                    next_node = next_node.next
+                    if next_node is not None: 
+                        starter_node.next = next_node
+                    else: 
+                        self.tail = starter_node
+                        starter_node.next = None
                     return
-                else:
-                    node = node.next
+            starter_node = starter_node.next
+
         raise ValueError('Item not found: {}'.format(item))
+
+    def find_if_matches(self, matching_function):
+        """Return an item from this linked list if it is present."""
+        node = self.head
+        while node is not None:
+            if matching_function(node.data): 
+                return node.data
+            node = node.next
+        return None 
                 
-
-
-
-
 if __name__ == "__main__":
     my_ll = LinkedList(["A", "B", "C"])
     print(my_ll)
