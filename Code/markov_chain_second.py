@@ -19,7 +19,7 @@ def build_chain(words: list):
 def walk_chain(mk_chain):
     max_words = randint(8, 20)
     rand_words = []
-    mk_keys = [key for key in mk]
+    mk_keys = [key for key in mk_chain]
     rand_key = choice(mk_keys)
     while len(rand_words) < max_words:
         word = mk_chain[rand_key].sample()

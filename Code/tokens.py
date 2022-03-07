@@ -26,6 +26,4 @@ def text_to_list(corpus):
     return split_text
 
 if __name__=='__main__':
-    text = open('tester.txt').read()
-    final = tokenize(text)
-    print(final)
+    pass
